@@ -5,15 +5,13 @@
   "type": "module",
   "scripts": {
     "build": "hardhat build",
-    "test": "hardhat test",
-    "node": "hardhat node",
-    "deploy:local": "hardhat ignition deploy ignition/modules/SnakBite.ts --network localhost",
     "deploy:sepolia": "hardhat ignition deploy ignition/modules/SnakBite.ts --network sepolia",
     "dev": "vite web",
     "web:build": "vite build web"
   },
   "devDependencies": {
-    "@nomicfoundation/hardhat-toolbox-mocha-ethers": "4.0.0",
+    "@nomicfoundation/hardhat-ignition": "3.1.9",
+    "@nomicfoundation/hardhat-keystore": "3.1.2",
     "@vitejs/plugin-react": "5.2.0",
     "hardhat": "3.20.0",
     "vite": "7.3.7"

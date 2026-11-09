@@ -1,11 +1,12 @@
 import { configVariable, defineConfig } from "hardhat/config";
-import hardhatToolboxMochaEthers
-  from "@nomicfoundation/hardhat-toolbox-mocha-ethers";
+import hardhatIgnition from "@nomicfoundation/hardhat-ignition";
+import hardhatKeystore from "@nomicfoundation/hardhat-keystore";
 
 export default defineConfig({
 
   plugins: [
-    hardhatToolboxMochaEthers
+    hardhatIgnition,
+    hardhatKeystore
   ],
 
   solidity: {
@@ -13,12 +14,6 @@ export default defineConfig({
   },
 
   networks: {
-
-    localhost: {
-      type: "http",
-      chainType: "l1",
-      url: "http://127.0.0.1:8545"
-    },
 
     sepolia: {
       type: "http",

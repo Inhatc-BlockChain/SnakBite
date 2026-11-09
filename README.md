@@ -6,37 +6,26 @@
 |---|---|
 | `contracts/SnakBite.sol` | 순위표 컨트랙트 |
 | `ignition/modules/SnakBite.ts` | 배포 모듈 |
-| `test/SnakBite.ts` | 테스트 10개 |
 | `web/src/SnackGame.jsx` | 게임 (canvas) |
 | `web/src/App.jsx` | MetaMask 연결, 점수 등록, 순위표 |
-| `web/src/contract.js` | ABI, chain ID 로 배포 주소 찾기 |
+| `web/src/contract.js` | ABI, Sepolia 배포 주소 찾기 |
 
-## 설치와 테스트
+## 설치
 Node.js 22.13 이상이 필요합니다.
 ```
 git clone https://github.com/Inhatc-BlockChain/SnakBite.git
 cd SnakBite
 npm ci
-npx hardhat test
 ```
 
-## 내 PC에서 실행
-터미널 3개를 씁니다.
-```
-npx hardhat node                 # 터미널 1 (끄지 않기)
-npm run deploy:local             # 터미널 2
-npm run dev                      # 터미널 3 → http://localhost:5173
-```
-MetaMask 를 Hardhat 로컬 네트워크(RPC `http://127.0.0.1:8545`, chain ID 31337)로 바꾸고 테스트 계정을 가져옵니다.
-
-## Sepolia 에서 실행
+## Sepolia 에 배포하고 실행
 다른 Hardhat 프로젝트에서 keystore 에 `SEPOLIA_RPC_URL`, `SEPOLIA_PRIVATE_KEY` 를 넣었다면 다시 넣지 않아도 됩니다.
 ```
 npm run deploy:sepolia
 npm run dev                      # MetaMask 를 Sepolia 로 → http://localhost:5173
 ```
 - **배포한 뒤에 `npm run dev` 를 시작합니다.** 배포 기록은 시작할 때 읽으므로, 다시 배포했다면 껐다가 다시 실행합니다.
-- 점수 등록에 ETH 를 보내지는 않고 가스비만 듭니다. 처음 등록은 가스 약 119,000 입니다.
+- 점수 등록에 ETH 를 보내지는 않고 가스비만 듭니다. 처음 등록은 가스 약 119,000 (컨트랙트의 첫 참가자는 약 136,000) 입니다.
 
 ## 반 전체가 같은 순위표 쓰기
 각자 배포하면 순위표도 각자 따로입니다. 한 사람만 Sepolia 에 배포하고, 나머지는 그 주소로 파일을 만듭니다 (PowerShell).
@@ -59,4 +48,4 @@ npm run dev
 ## 확인 환경 (2026-11-09)
 Node.js 24.20 / npm 11.19 / hardhat 3.20.0 / ethers 6.17.0 / React 19.3.1 / Vite 7.3.7 / solc 0.8.28
 
-로컬 테스트 노드와 브라우저에서 확인했습니다. MetaMask 대신 시험용 지갑 코드를 썼으므로, 수업 전에 실제 MetaMask + Sepolia 로 한 번 리허설이 필요합니다.
+실제 Sepolia 와 MetaMask 대신 chain ID 11155111 의 임시 노드와 시험용 지갑 코드로 확인했습니다. 수업 전에 실제 MetaMask + Sepolia 로 한 번 리허설이 필요합니다.

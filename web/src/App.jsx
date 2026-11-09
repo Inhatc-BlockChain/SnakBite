@@ -3,6 +3,7 @@ import { ethers } from "ethers";
 import SnackGame from "./SnackGame.jsx";
 import { abi, findAddress } from "./contract.js";
 
+const SEPOLIA_ID = 11155111n;
 const SEPOLIA_HEX = "0xaa36a7";   // 11155111
 const short = (address) => `${address.slice(0, 6)}…${address.slice(-4)}`;
 const nameBytes = (text) => new TextEncoder().encode(text).length;
@@ -59,13 +60,15 @@ export default function App() {
       const signer = await provider.getSigner();
       const { chainId } = await provider.getNetwork();
 
-      const address = findAddress(chainId);
-      if (!address) {
-        // 이 네트워크에는 배포 기록이 없음 → MetaMask 에 Sepolia 로 바꿔 달라고 요청
-        setMessage(`chain ${chainId} 에 배포 기록이 없습니다 → MetaMask에서 Sepolia로 전환해 주세요`);
+      if (chainId !== SEPOLIA_ID) {
+        // 다른 네트워크 → MetaMask 에 Sepolia 로 바꿔 달라고 요청
+        setMessage("MetaMask에서 Sepolia로 전환해 주세요");
         await provider.send("wallet_switchEthereumChain", [{ chainId: SEPOLIA_HEX }]);
         return;   // 전환되면 chainChanged → 새로 고침 → 연결 버튼 다시 누르기
       }
+
+      const address = findAddress();
+      if (!address) return setMessage("Sepolia 배포 기록이 없습니다 → 배포한 뒤 npm run dev 를 다시 실행해 주세요");
 
       connected.current = true;
       setAccount(signer.address);

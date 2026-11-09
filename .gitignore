@@ -7,7 +7,7 @@ cache/
 types/
 web/dist/
 
-# 배포 기록 (PC, 학생마다 다름: 로컬 chain-31337, Sepolia chain-11155111)
+# 배포 기록 (학생마다 다름: Sepolia chain-11155111)
 ignition/deployments/
 
 # 비밀값 (개인 키 등은 keystore 에 저장하지만, 실수로 만든 파일도 올라가지 않게)
@@ -15,9 +15,7 @@ ignition/deployments/
 .env.*
 *.key
 
-# 테스트 커버리지, 로그, OS 파일
-coverage/
-coverage.json
+# 로그, OS 파일
 *.log
 .DS_Store
 Thumbs.db
