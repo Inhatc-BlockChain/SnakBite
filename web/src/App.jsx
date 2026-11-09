@@ -92,7 +92,10 @@ export default function App() {
     setBusy(false);
   };
 
-  const onFinish = useCallback((finalScore) => setScore(finalScore), []);
+  const onFinish = useCallback((finalScore) => {
+    setScore(finalScore);
+    setMessage("");
+  }, []);
 
   const trimmed = name.trim();
   const nameOk = trimmed.length > 0 && nameBytes(trimmed) <= 30;

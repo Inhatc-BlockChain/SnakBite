@@ -38,6 +38,14 @@ npm run dev                      # MetaMask 를 Sepolia 로 → http://localhost
 - **배포한 뒤에 `npm run dev` 를 시작합니다.** 배포 기록은 시작할 때 읽으므로, 다시 배포했다면 껐다가 다시 실행합니다.
 - 점수 등록에 ETH 를 보내지는 않고 가스비만 듭니다. 처음 등록은 가스 약 119,000 입니다.
 
+## 반 전체가 같은 순위표 쓰기
+각자 배포하면 순위표도 각자 따로입니다. 한 사람만 Sepolia 에 배포하고, 나머지는 그 주소로 파일을 만듭니다 (PowerShell).
+```
+New-Item -ItemType Directory -Force ignition\deployments\chain-11155111
+Set-Content ignition\deployments\chain-11155111\deployed_addresses.json '{ "SnakBiteModule#SnakBite": "0x배포한주소" }'
+npm run dev
+```
+
 ## 수업에서 볼 곳
 - **쓰기는 저장만, 정렬은 view 에서**: `submitScore` 는 내 기록만 저장하고, 정렬은 `getTop` 에서 합니다. 쓰기에서 배열을 정렬하면 다른 사람이 먼저 등록할 때 가스량이 달라져, 가스 예상이 어긋나고 out of gas 가 날 수 있습니다 (홀짝 게임의 가스 예상 문제와 같은 원인).
 - **한 사람 한 줄**: `mapping(address => Entry)` 로 플레이어마다 최고 기록 하나만 둡니다.
