@@ -28,12 +28,13 @@ npm run dev                      # MetaMask 를 Sepolia 로 → http://localhost
 - 점수 등록에 ETH 를 보내지는 않고 가스비만 듭니다. 처음 등록은 가스 약 119,000 (컨트랙트의 첫 참가자는 약 136,000) 입니다.
 
 ## 반 전체가 같은 순위표 쓰기
-각자 배포하면 순위표도 각자 따로입니다. 한 사람만 Sepolia 에 배포하고, 나머지는 그 주소로 파일을 만듭니다 (PowerShell).
+각자 배포하면 순위표도 각자 따로입니다. 이 저장소에는 수업용으로 배포한 컨트랙트의 주소 파일(`ignition/deployments/chain-11155111/deployed_addresses.json`)이 들어 있습니다. 각자 배포하면 이 파일이 내 주소로 바뀌므로, 반 전체가 같은 순위표를 쓰려면 GitHub 버전으로 되돌립니다.
 ```
-New-Item -ItemType Directory -Force ignition\deployments\chain-11155111
-Set-Content ignition\deployments\chain-11155111\deployed_addresses.json '{ "SnakBiteModule#SnakBite": "0x배포한주소" }'
-npm run dev
+git checkout -- ignition/deployments/chain-11155111/deployed_addresses.json
+npm run dev                      # 켜져 있으면 Ctrl + C 로 끄고 다시
 ```
+- 배포하지 않았다면 되돌릴 필요 없이 `npm run dev` 만 하면 됩니다.
+- 설치 없이 https://snak-bite.vercel.app 에 접속해도 같은 순위표입니다.
 
 ## 수업에서 볼 곳
 - **쓰기는 저장만, 정렬은 view 에서**: `submitScore` 는 내 기록만 저장하고, 정렬은 `getTop` 에서 합니다. 쓰기에서 배열을 정렬하면 다른 사람이 먼저 등록할 때 가스량이 달라져, 가스 예상이 어긋나고 out of gas 가 날 수 있습니다 (홀짝 게임의 가스 예상 문제와 같은 원인).
